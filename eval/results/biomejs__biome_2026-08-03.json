@@ -1,0 +1,883 @@
+{
+  "repo": "biomejs/biome",
+  "freeze": "2026-08-03",
+  "window_days": 56,
+  "model": "claude-sonnet-5-5",
+  "versions": {
+    "assess": "fc563cd89452a66e",
+    "rank": "35ba590879ecd53c",
+    "rules": "5acafa9e768d05dd"
+  },
+  "open_at_freeze": 390,
+  "outcome_counts": {
+    "still_open": 224,
+    "completed": 132,
+    "not_planned": 33,
+    "duplicate": 1
+  },
+  "quote_checks_failed": 18,
+  "rejections_used": 26,
+  "recent_fixes_used": 39,
+  "rules": [
+    {
+      "id": "R1",
+      "status": "proposed",
+      "text": "Decline bug reports without a valid, minimal reproduction on the latest version. Ask for a repro repository before investigating.",
+      "cites": [
+        "D8694",
+        "D11028",
+        "D11069",
+        "D10229"
+      ]
+    },
+    {
+      "id": "R2",
+      "status": "proposed",
+      "text": "Decline issues that skip the issue template or leave out required information. Ask the reporter to open a new issue with the template filled in.",
+      "cites": [
+        "D10229",
+        "D10304",
+        "D3992",
+        "D4836"
+      ]
+    },
+    {
+      "id": "R3",
+      "status": "proposed",
+      "text": "Decline reports of documented or known limitations (unsupported languages, embedded template literals, extends microsyntax). Point to the docs or the pinned discussion.",
+      "cites": [
+        "D10359",
+        "D10360",
+        "D10502",
+        "D10280"
+      ]
+    },
+    {
+      "id": "R4",
+      "status": "proposed",
+      "text": "Decline problems caused by things the project doesn't control, such as third-party packages (Winget, Windows), registry setup or dependency versions.",
+      "cites": [
+        "D8891",
+        "D10505",
+        "D10639",
+        "D10677"
+      ]
+    },
+    {
+      "id": "R5",
+      "status": "proposed",
+      "text": "Decline reports where the behavior is intended, such as matching Prettier, following the spec, or reading dependencies when type-aware rules are on.",
+      "cites": [
+        "D10256",
+        "D10382",
+        "D10927",
+        "D10628"
+      ]
+    },
+    {
+      "id": "R6",
+      "status": "proposed",
+      "text": "Decline requests to resolve conflicts between lint rules automatically. Users should adjust their configuration or use overrides instead.",
+      "cites": [
+        "D10628",
+        "D10783",
+        "D10656"
+      ]
+    },
+    {
+      "id": "R7",
+      "status": "proposed",
+      "text": "Redirect questions, security reports and other off-tracker topics to the right place (discussions, security advisories, the external maintainer) instead of handling them as issues.",
+      "cites": [
+        "D10380",
+        "D10508",
+        "D10505",
+        "D8891"
+      ]
+    },
+    {
+      "id": "R8",
+      "status": "proposed",
+      "text": "Close reports of bugs already fixed in a newer release. Ask users to update to the latest version and search closed issues first.",
+      "cites": [
+        "D11069",
+        "D11141",
+        "D8694"
+      ]
+    }
+  ],
+  "summary": {
+    "without_history": {
+      "do": {
+        "mean": 5.33,
+        "min": 5,
+        "max": 6,
+        "of": [
+          10,
+          10,
+          10
+        ]
+      },
+      "skip": {
+        "mean": 1,
+        "min": 1,
+        "max": 1,
+        "of": [
+          7,
+          8,
+          8
+        ]
+      }
+    },
+    "with_history": {
+      "do": {
+        "mean": 7.33,
+        "min": 7,
+        "max": 8,
+        "of": [
+          10,
+          10,
+          10
+        ]
+      },
+      "skip": {
+        "mean": 1,
+        "min": 1,
+        "max": 1,
+        "of": [
+          7,
+          7,
+          7
+        ]
+      }
+    }
+  },
+  "baselines": {
+    "most_thumbs_up": {
+      "hits": 0,
+      "of": 10,
+      "base_rate": 0.338,
+      "random_expected": 3.38,
+      "lift": 0,
+      "p_random_at_least": 1
+    },
+    "newest": {
+      "hits": 6,
+      "of": 10,
+      "base_rate": 0.338,
+      "random_expected": 3.38,
+      "lift": 1.77,
+      "p_random_at_least": 0.0792
+    },
+    "most_comments": {
+      "hits": 2,
+      "of": 10,
+      "base_rate": 0.338,
+      "random_expected": 3.38,
+      "lift": 0.59,
+      "p_random_at_least": 0.9048
+    },
+    "has_linked_pr": {
+      "hits": 2,
+      "of": 10,
+      "base_rate": 0.338,
+      "random_expected": 3.38,
+      "lift": 0.59,
+      "p_random_at_least": 0.9048
+    }
+  },
+  "runs": {
+    "without_history": [
+      {
+        "do": {
+          "hits": 5,
+          "of": 10,
+          "base_rate": 0.338,
+          "random_expected": 3.38,
+          "lift": 1.48,
+          "p_random_at_least": 0.2211
+        },
+        "skip": {
+          "hits": 1,
+          "of": 7,
+          "base_rate": 0.087,
+          "random_expected": 0.61,
+          "lift": 1.64,
+          "p_random_at_least": 0.4747
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 10838,
+              "reason": "Regression in 2.5.0 that duplicates one JSX attribute and silently drops another. 6 reporters, active this month, a maintainer has replied and a PR is linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix in stdin mode deletes the contents of script and style tags. A PR is already linked and a maintainer is engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 11012,
+              "reason": "Small false positive reported 13 days ago. A maintainer has replied and a PR exists, so it is close to done.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "noUnnecessaryConditions false positives from 4 reporters. A maintainer has replied and a PR is linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11174,
+              "reason": "Opened today with a clear repro of a noUnnecessaryConditions false positive. A maintainer is already talking with the reporter, and it may share a fix with #10704.",
+              "rule_ids": []
+            },
+            {
+              "number": 12638,
+              "reason": "The editor extension sometimes corrupts files when formatting, so lines disappear. 4 reporters and no maintainer reply yet.",
+              "rule_ids": []
+            },
+            {
+              "number": 11023,
+              "reason": "Fresh report, active this month: --only with check still applies other changes. 3 reporters and a maintainer is engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 7291,
+              "reason": "LSP formatting fails for Svelte files in Helix. 4 reporters, a maintainer has replied, and the fix is judged small.",
+              "rule_ids": []
+            },
+            {
+              "number": 8185,
+              "reason": "A private method that is actually used gets flagged as unused. 4 reporters and the fix looks small.",
+              "rule_ids": []
+            },
+            {
+              "number": 6974,
+              "reason": "Same unused-private-member false positive, here with destructuring. Small fix and 2 PRs are already linked, so it could be fixed together with #8185.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 9132,
+              "reason": "Duplicate: already tracked in #9218.",
+              "rule_ids": []
+            },
+            {
+              "number": 9572,
+              "reason": "The reporter says it duplicates #9507.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Marked as a duplicate of an existing stack overflow issue. Track it there.",
+              "rule_ids": []
+            },
+            {
+              "number": 2188,
+              "reason": "Renovate dependency dashboard bot issue, not a work item.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "Not a bug: the user is running an old CLI with a newer config, and a maintainer has already explained this.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "A question, already answered: import sorting is not part of the formatter.",
+              "rule_ids": []
+            },
+            {
+              "number": 8139,
+              "reason": "Question with a single reporter and no clear bug. A maintainer replied and it has been quiet for 258 days.",
+              "rule_ids": []
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 6,
+          "of": 10,
+          "base_rate": 0.338,
+          "random_expected": 3.38,
+          "lift": 1.77,
+          "p_random_at_least": 0.0792
+        },
+        "skip": {
+          "hits": 1,
+          "of": 8,
+          "base_rate": 0.087,
+          "random_expected": 0.7,
+          "lift": 1.43,
+          "p_random_at_least": 0.5213
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 10838,
+              "reason": "Regression in 2.5.0: useSortedAttributes duplicates one JSX attribute and drops another. 6 reporters, the maintainer is engaged and a PR is linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix in stdin mode deletes the contents of script/style tags. This is data loss, a maintainer replied and a PR is linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11012,
+              "reason": "Fresh noUndeclaredDependencies false positive. The fix is small, a PR is already linked and the maintainer is active in the thread.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "4 reporters hit noUnnecessaryConditions false positives. Recent activity, the maintainer replied and a PR is linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11174,
+              "reason": "New noUnnecessaryConditions false positive with 7 comments this month. It can be fixed together with #10704.",
+              "rule_ids": []
+            },
+            {
+              "number": 11023,
+              "reason": "'check --only' still makes other changes to files. 3 reporters, recent, and the maintainer is already engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 12638,
+              "reason": "The editor extension corrupts files when formatting (data loss). 4 reporters and no maintainer reply yet, so it needs triage.",
+              "rule_ids": []
+            },
+            {
+              "number": 7711,
+              "reason": "Infinite loop and memory leak with a reliable repro, and a PR is already linked. Review the PR.",
+              "rule_ids": []
+            },
+            {
+              "number": 6974,
+              "reason": "Small fix for a false 'unused private member' report when destructuring. 2 PRs are linked and #8185 may be the same bug.",
+              "rule_ids": []
+            },
+            {
+              "number": 7291,
+              "reason": "LSP formatting fails for Svelte files in Helix. 4 reporters, the effort looks small and the maintainer is already in the thread.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 9132,
+              "reason": "Duplicate, already tracked at #9218.",
+              "rule_ids": []
+            },
+            {
+              "number": 9572,
+              "reason": "The reporter says it is a duplicate of #9507.",
+              "rule_ids": []
+            },
+            {
+              "number": 2188,
+              "reason": "Bot-generated Dependency Dashboard, not an issue to act on.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "The reporter was running an old CLI with a newer config. User error, already answered.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "A question: import sorting is not part of the formatter. Already answered.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Marked as a duplicate stack overflow report. Track it in the original issue.",
+              "rule_ids": []
+            },
+            {
+              "number": 8139,
+              "reason": "Single-reporter question with an unclear scope. A maintainer already replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 10810,
+              "reason": "Marketplace domain verification is publisher admin work, not a code issue. No harm to users.",
+              "rule_ids": []
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 5,
+          "of": 10,
+          "base_rate": 0.338,
+          "random_expected": 3.38,
+          "lift": 1.48,
+          "p_random_at_least": 0.2211
+        },
+        "skip": {
+          "hits": 1,
+          "of": 8,
+          "base_rate": 0.087,
+          "random_expected": 0.7,
+          "lift": 1.43,
+          "p_random_at_least": 0.5213
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 10838,
+              "reason": "2.5.0 regression silently duplicates/drops JSX attributes (data loss), 6 reporters, PR linked and active thread",
+              "rule_ids": []
+            },
+            {
+              "number": 11012,
+              "reason": "Fresh false positive, small fix, PR linked and maintainer engaged; nearly done",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "noUnnecessaryConditions false positives hit 4 people; PR linked, maintainer replied, recent activity",
+              "rule_ids": []
+            },
+            {
+              "number": 11174,
+              "reason": "Brand-new false positive in same rule as #10704, maintainer active in 7 comments; cheap to fix alongside",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix via stdin deletes script/style contents (data loss); PR linked, activity this month",
+              "rule_ids": []
+            },
+            {
+              "number": 11023,
+              "reason": "--only applies unrequested changes; reported 12 days ago by 3 users, maintainer engaged",
+              "rule_ids": []
+            },
+            {
+              "number": 6974,
+              "reason": "Small fix for unused private member false positive; 2 PRs already linked",
+              "rule_ids": []
+            },
+            {
+              "number": 8331,
+              "reason": "Small fix for merged interface false positive, PR already linked",
+              "rule_ids": []
+            },
+            {
+              "number": 7711,
+              "reason": "Memory leak/infinite loop with reliable repro and a linked PR; worth reviewing",
+              "rule_ids": []
+            },
+            {
+              "number": 8185,
+              "reason": "Used private method flagged unused, 4 reporters, small effort; likely related to #6974",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 9132,
+              "reason": "Duplicate, already tracked at #9218",
+              "rule_ids": []
+            },
+            {
+              "number": 9572,
+              "reason": "Reporter confirms it duplicates #9507",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Marked duplicate of an existing stack overflow report; maintainer already replied",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "Not a bug: running an old CLI with a new config",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "Question already answered: import sorting isn't part of the formatter",
+              "rule_ids": []
+            },
+            {
+              "number": 8139,
+              "reason": "Question with a single reporter and no clear bug",
+              "rule_ids": []
+            },
+            {
+              "number": 2188,
+              "reason": "Automated Dependency Dashboard, not a work item",
+              "rule_ids": []
+            },
+            {
+              "number": 10810,
+              "reason": "Marketplace domain verification is an account task, not code; no engagement",
+              "rule_ids": []
+            }
+          ]
+        }
+      }
+    ],
+    "with_history": [
+      {
+        "do": {
+          "hits": 7,
+          "of": 10,
+          "base_rate": 0.338,
+          "random_expected": 3.38,
+          "lift": 2.07,
+          "p_random_at_least": 0.0201
+        },
+        "skip": {
+          "hits": 1,
+          "of": 7,
+          "base_rate": 0.087,
+          "random_expected": 0.61,
+          "lift": 1.64,
+          "p_random_at_least": 0.4747
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 10838,
+              "reason": "Confirmed 2.5.0 regression that silently duplicates/drops JSX attributes (data loss); 6 reporters, active, PR linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 10806,
+              "reason": "Confirmed formatter crash hit by 5 people, recent activity, maintainer engaged and a PR already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11182,
+              "reason": "Brand-new confirmed suppression bug with maintainer engaged and a PR already open; close to done.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "Confirmed type-inference false positives, 4 reporters, recent, PR linked, in the team's current focus area.",
+              "rule_ids": []
+            },
+            {
+              "number": 6206,
+              "reason": "Small confirmed fix (ignore SVG elements), 3 linked PRs and a maintainer reply; quick win.",
+              "rule_ids": []
+            },
+            {
+              "number": 6974,
+              "reason": "Small confirmed false positive for private members used via destructuring; 2 PRs already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 8331,
+              "reason": "Small confirmed false positive on merged generic interfaces with a PR already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix via stdin deletes script/style contents (data loss); confirmed with a PR linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 10782,
+              "reason": "Confirmed linter hang on long import chains, recent report with maintainer engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 10607,
+              "reason": "Confirmed tsconfig paths being ignored causes wrong warnings; a PR is already linked.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "Renovate dependency dashboard, not a user issue or actionable bug report.",
+              "rule_ids": []
+            },
+            {
+              "number": 9572,
+              "reason": "Reporter states it is a duplicate of #9507; close in favor of that issue.",
+              "rule_ids": []
+            },
+            {
+              "number": 9132,
+              "reason": "Already tracked at #9218; close as duplicate.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "Caused by running an old CLI with a newer config; user should update to the latest version.",
+              "rule_ids": [
+                "R8"
+              ]
+            },
+            {
+              "number": 7416,
+              "reason": "Import sorting isn't part of the formatter by design; intended behavior and better suited to discussions.",
+              "rule_ids": [
+                "R5",
+                "R7"
+              ]
+            },
+            {
+              "number": 8139,
+              "reason": "No description provided and awaiting reporter response; ask for a new issue with the template filled in.",
+              "rule_ids": [
+                "R2"
+              ]
+            },
+            {
+              "number": 10760,
+              "reason": "Marked duplicate of an existing stack-overflow report, has a workaround, and is waiting on the reporter.",
+              "rule_ids": []
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 8,
+          "of": 10,
+          "base_rate": 0.338,
+          "random_expected": 3.38,
+          "lift": 2.36,
+          "p_random_at_least": 0.0034
+        },
+        "skip": {
+          "hits": 1,
+          "of": 7,
+          "base_rate": 0.087,
+          "random_expected": 0.61,
+          "lift": 1.64,
+          "p_random_at_least": 0.4747
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 10838,
+              "reason": "Regression in 2.5.0: useSortedAttributes duplicates one JSX attribute and drops another (data loss). Confirmed, 6 reporters, PR linked, active this month.",
+              "rule_ids": []
+            },
+            {
+              "number": 11182,
+              "reason": "Confirmed bug from today: the noPositiveTabindex suppression comment doesn't work. A maintainer is already in the thread and a PR is linked, so it's close to done.",
+              "rule_ids": []
+            },
+            {
+              "number": 10806,
+              "reason": "Confirmed formatter crash ('unexpected error') hit by 5 reporters. Reported a month ago, PR already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "Confirmed noUnnecessaryConditions false positives with 4 reporters, recent activity and a linked PR.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "Data loss: check --fix in stdin mode deletes the contents of script/style tags in HTML. Confirmed, PR linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 6206,
+              "reason": "Small, confirmed fix: useUniqueElementIds should ignore SVG elements. 3 PRs already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 6974,
+              "reason": "Small, confirmed false positive: destructuring isn't counted as using a private class member. 2 PRs linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 8331,
+              "reason": "Small, confirmed false positive: a merged generic interface is flagged as unused. PR already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 10782,
+              "reason": "Confirmed hang: noUndeclaredClasses on a long TSX import chain. Recent, and a maintainer has replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 7711,
+              "reason": "Confirmed memory leak / infinite loop (dozens of processes at 90%+ CPU) with a reliable repro. PR linked.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "Renovate's Dependency Dashboard is a bot-maintained tracking issue, not a bug or feature to act on.",
+              "rule_ids": []
+            },
+            {
+              "number": 9572,
+              "reason": "The reporter says it duplicates #9507. Close it as a duplicate.",
+              "rule_ids": []
+            },
+            {
+              "number": 9132,
+              "reason": "Already tracked in #9218. Close it as a duplicate.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Labelled duplicate and has a workaround. Close it in favour of the existing stack overflow issue.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "The user runs an old CLI with a newer config. Ask them to update to the latest version.",
+              "rule_ids": [
+                "R8"
+              ]
+            },
+            {
+              "number": 7416,
+              "reason": "Intended: import sorting isn't part of the formatter. Point the user to the import-sorting assist instead.",
+              "rule_ids": [
+                "R5",
+                "R7"
+              ]
+            },
+            {
+              "number": 8139,
+              "reason": "Question with no supporting details from a single reporter, waiting on a reply for 258 days. Ask them to reopen using the issue template.",
+              "rule_ids": [
+                "R2"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 7,
+          "of": 10,
+          "base_rate": 0.338,
+          "random_expected": 3.38,
+          "lift": 2.07,
+          "p_random_at_least": 0.0201
+        },
+        "skip": {
+          "hits": 1,
+          "of": 7,
+          "base_rate": 0.087,
+          "random_expected": 0.61,
+          "lift": 1.64,
+          "p_random_at_least": 0.4747
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 10838,
+              "reason": "Confirmed 2.5.0 regression: duplicates one JSX attribute and silently drops another. 6 reporters, recent activity, a linked PR, and the team is working in this area.",
+              "rule_ids": []
+            },
+            {
+              "number": 10806,
+              "reason": "Confirmed formatter crash hit by 5 people in the last month. A maintainer is engaged and a PR is already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11182,
+              "reason": "Opened today, already confirmed, maintainer replied and a PR exists. Likely a quick merge while the reporter is still around.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "Confirmed type-inference false positives from 4 reporters, recently active, with a linked PR in an area the team is working on now.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix over stdin deletes the contents of script/style tags in HTML. Confirmed data loss, a PR exists and the thread is still active.",
+              "rule_ids": []
+            },
+            {
+              "number": 6206,
+              "reason": "Small, confirmed fix (skip SVG elements in useUniqueElementIds), with 3 linked PRs. One just needs review and merging.",
+              "rule_ids": []
+            },
+            {
+              "number": 6974,
+              "reason": "Small, confirmed false positive for destructured private class members, with 2 linked PRs ready to review.",
+              "rule_ids": []
+            },
+            {
+              "number": 8331,
+              "reason": "Small, confirmed false positive (merged generic interface reported as unused) with a linked PR.",
+              "rule_ids": []
+            },
+            {
+              "number": 10782,
+              "reason": "Confirmed hang in noUndeclaredClasses on long TSX import chains. Reported recently and a maintainer is already engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 10607,
+              "reason": "Confirmed bug: tsconfig paths are ignored, causing false warnings. Recent, with a linked PR.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "Bot-generated Dependency Dashboard, not a user issue and nothing to fix.",
+              "rule_ids": []
+            },
+            {
+              "number": 9572,
+              "reason": "The reporter says it duplicates #9507.",
+              "rule_ids": []
+            },
+            {
+              "number": 9132,
+              "reason": "Duplicate: already tracked in #9218.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Marked as a duplicate stack overflow with a known workaround. Track it in the original issue.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "Caused by running an old CLI with a newer configuration. Ask the reporter to update to the latest version.",
+              "rule_ids": [
+                "R8"
+              ]
+            },
+            {
+              "number": 7416,
+              "reason": "Import sorting is intentionally not part of the formatter. A usage question that belongs in discussions.",
+              "rule_ids": [
+                "R5",
+                "R7"
+              ]
+            },
+            {
+              "number": 8139,
+              "reason": "Formatter and linter clash that can be handled in config. No details given and still waiting on the reporter.",
+              "rule_ids": [
+                "R6",
+                "R2"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "model_calls": 17,
+  "note": "Issue bodies are today's text; GitHub's REST API keeps no edit history. Comments edited after the freeze were dropped."
+}

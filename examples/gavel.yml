@@ -1,0 +1,105 @@
+name: Gavel
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+  issues:
+    types: [closed]
+  pull_request:
+    types: [closed]
+
+concurrency:
+  group: gavel-state
+  cancel-in-progress: false
+
+jobs:
+  # Every Monday, or by hand: open this week's plan issue. Gavel only reads code and issues here.
+  plan:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: kinu01/gavel@v1
+        with:
+          mode: plan
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+  # When you close a plan issue: save your decisions. No model runs here.
+  record:
+    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'gavel-plan')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      issues: read
+    outputs:
+      approved: ${{ steps.gavel.outputs.approved }}
+    steps:
+      - id: gavel
+        uses: kinu01/gavel@v1
+        with:
+          mode: record
+          max_prs_per_week: "2"
+
+  # Optional (v2): build each approved issue into a pull request, one at a time. You still review and merge.
+  build:
+    needs: record
+    if: needs.record.outputs.approved != '[]' && needs.record.outputs.approved != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      max-parallel: 1
+      matrix:
+        issue: ${{ fromJson(needs.record.outputs.approved) }}
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: git checkout -b "gavel/issue-${{ matrix.issue }}"
+      - id: brief
+        uses: kinu01/gavel@v1
+        with:
+          mode: brief
+          issue: ${{ matrix.issue }}
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: ${{ steps.brief.outputs.prompt }}
+          claude_args: >-
+            --max-turns 40
+            --allowedTools "Read,Edit,Write,Grep,Glob,Bash(npm test:*),Bash(npm run test:*),Bash(git add:*),Bash(git commit:*),Bash(git status:*),Bash(git diff:*)"
+      - uses: kinu01/gavel@v1
+        with:
+          mode: guard
+      - name: Open the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet "origin/${{ github.event.repository.default_branch }}...HEAD"; then
+            echo "The builder made no change for #${{ matrix.issue }}."; exit 0
+          fi
+          git push --quiet origin HEAD
+          gh pr create --title "Fix #${{ matrix.issue }} (built by Gavel)" \
+            --body "Closes #${{ matrix.issue }}. Approved in a Gavel plan and built by Claude. A human reviews and merges this. Gavel never merges."
+
+  # When a Gavel pull request is merged or closed: record the outcome for the track record.
+  outcome:
+    if: github.event_name == 'pull_request' && startsWith(github.event.pull_request.head.ref, 'gavel/issue-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - uses: kinu01/gavel@v1
+        with:
+          mode: outcome

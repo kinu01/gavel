@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assessments"],
+  "properties": {
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["number", "type", "harm", "effort", "fit", "evidence_quote", "vision_quote"],
+        "properties": {
+          "number": { "type": "integer" },
+          "type": { "enum": ["bug", "feature", "enhancement", "question", "duplicate", "invalid"] },
+          "harm": { "enum": ["security", "data_loss", "crash", "wrong_result", "degraded", "cosmetic", "none"] },
+          "effort": { "enum": ["S", "M", "L", "XL"] },
+          "fit": { "enum": ["in", "out", "unclear"] },
+          "evidence_quote": { "type": "string", "maxLength": 160 },
+          "vision_quote": { "type": "string", "maxLength": 160 }
+        }
+      }
+    }
+  }
+}

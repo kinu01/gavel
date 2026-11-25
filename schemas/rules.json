@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["rules"],
+  "properties": {
+    "rules": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "cites"],
+        "properties": {
+          "text": { "type": "string", "maxLength": 260 },
+          "cites": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,145 @@
+name: "Gavel"
+description: "Each week Gavel proposes what your project should work on and what to decline, with a reason for each. You rule on every item."
+author: "Emmanuel Shola"
+branding:
+  icon: "check-square"
+  color: "purple"
+
+inputs:
+  mode:
+    description: "plan = open this week's plan issue. record = save the decisions from a closed plan issue. brief = write the builder's instructions for one approved issue. guard = fail if the branch touches protected files. outcome = record what happened to a Gavel pull request."
+    required: true
+  anthropic_api_key:
+    description: "Your Anthropic API key. Set this or claude_code_oauth_token."
+    required: false
+    default: ""
+  claude_code_oauth_token:
+    description: "A Claude Pro or Max token from `claude setup-token`. Set this or anthropic_api_key."
+    required: false
+    default: ""
+  github_token:
+    description: "Token used to read issues, open the plan issue and push the gavel-state branch."
+    required: false
+    default: ${{ github.token }}
+  approvers:
+    description: "Comma-separated GitHub logins whose decisions count. Defaults to the repo owner."
+    required: false
+    default: ${{ github.repository_owner }}
+  model:
+    description: "Claude model for the judgments."
+    required: false
+    default: "claude-sonnet-5-5"
+  issue:
+    description: "Issue number, for brief."
+    required: false
+    default: ""
+  base:
+    description: "Branch to compare against, for guard."
+    required: false
+    default: ${{ github.event.repository.default_branch }}
+  protect:
+    description: "Extra protected path patterns for guard (regular expressions, space-separated)."
+    required: false
+    default: ""
+  max_prs_per_week:
+    description: "Most pull requests Gavel may start in a week."
+    required: false
+    default: "2"
+  max_issues:
+    description: "Most open issues to read per run, to cap cost."
+    required: false
+    default: "300"
+
+outputs:
+  approved:
+    description: "JSON list of approved issue numbers handed to the builder (record mode)."
+    value: ${{ steps.record.outputs.approved }}
+  prompt:
+    description: "The builder's instructions (brief mode)."
+    value: ${{ steps.brief.outputs.prompt }}
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "22"
+
+    - name: Load the decision log
+      if: inputs.mode == 'plan' || inputs.mode == 'record' || inputs.mode == 'outcome'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
+      run: |
+        if git ls-remote --exit-code --heads "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gavel-state >/dev/null 2>&1; then
+          git clone --quiet --depth 1 --branch gavel-state "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .gavel-state
+        else
+          mkdir -p .gavel-state && git -C .gavel-state init --quiet -b gavel-state
+          git -C .gavel-state remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+        fi
+
+    - name: Plan
+      if: inputs.mode == 'plan'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic_api_key }}
+        CLAUDE_CODE_OAUTH_TOKEN: ${{ inputs.claude_code_oauth_token }}
+      run: |
+        if [ -z "$ANTHROPIC_API_KEY$CLAUDE_CODE_OAUTH_TOKEN" ]; then
+          echo "Set anthropic_api_key or claude_code_oauth_token." >&2
+          exit 1
+        fi
+        npm install -g @anthropic-ai/claude-code >/dev/null
+        node "$GITHUB_ACTION_PATH/src/cli.mjs" plan --state .gavel-state --model "${{ inputs.model }}" --max-issues "${{ inputs.max_issues }}"
+
+    - name: Record
+      id: record
+      if: inputs.mode == 'record'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
+        GAVEL_SENDER: ${{ github.event.sender.login }}
+        GAVEL_APPROVERS: ${{ inputs.approvers }}
+        ISSUE: ${{ github.event.issue.number }}
+      run: |
+        node "$GITHUB_ACTION_PATH/src/cli.mjs" record --state .gavel-state --issue "$ISSUE" --max-prs-per-week "${{ inputs.max_prs_per_week }}"
+        cd .gavel-state
+        git add -A
+        if git diff --cached --quiet; then exit 0; fi
+        git -c user.name="gavel[bot]" -c user.email="gavel@users.noreply.github.com" commit --quiet -m "Record decisions from plan #$ISSUE"
+        git push --quiet origin gavel-state
+
+    - name: Brief
+      id: brief
+      if: inputs.mode == 'brief'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
+      run: |
+        {
+          echo "prompt<<GAVEL_BRIEF_END"
+          node "$GITHUB_ACTION_PATH/src/cli.mjs" brief --issue "${{ inputs.issue }}" | grep -v '^GAVEL_BRIEF_END$'
+          echo "GAVEL_BRIEF_END"
+        } >> "$GITHUB_OUTPUT"
+
+    - name: Guard
+      if: inputs.mode == 'guard'
+      shell: bash
+      run: |
+        git fetch --quiet origin "${{ inputs.base }}"
+        git diff --name-only "origin/${{ inputs.base }}...HEAD" | node "$GITHUB_ACTION_PATH/src/guard-diff.mjs" ${{ inputs.protect }}
+
+    - name: Outcome
+      if: inputs.mode == 'outcome'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github_token }}
+        PR: ${{ github.event.pull_request.number }}
+      run: |
+        node "$GITHUB_ACTION_PATH/src/cli.mjs" outcome --state .gavel-state --pr "$PR"
+        cd .gavel-state
+        git add -A
+        if git diff --cached --quiet; then exit 0; fi
+        git -c user.name="gavel[bot]" -c user.email="gavel@users.noreply.github.com" commit --quiet -m "Record outcome of pull request #$PR"
+        git push --quiet origin gavel-state

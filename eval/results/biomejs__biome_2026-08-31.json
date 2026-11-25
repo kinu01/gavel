@@ -1,0 +1,817 @@
+{
+  "repo": "biomejs/biome",
+  "freeze": "2026-08-31",
+  "window_days": 56,
+  "model": "claude-sonnet-5-5",
+  "versions": {
+    "assess": "fc563cd89452a66e",
+    "rank": "35ba590879ecd53c",
+    "rules": "5acafa9e768d05dd"
+  },
+  "open_at_freeze": 386,
+  "outcome_counts": {
+    "completed": 135,
+    "still_open": 223,
+    "not_planned": 27,
+    "duplicate": 1
+  },
+  "quote_checks_failed": 0,
+  "rejections_used": 31,
+  "recent_fixes_used": 106,
+  "rules": [
+    {
+      "id": "R1",
+      "status": "proposed",
+      "text": "Decline bug reports without a minimal reproduction (playground link, repo, or 'biome rage' output) until the reporter provides one.",
+      "cites": [
+        "D11028",
+        "D11319",
+        "D11320",
+        "D11430",
+        "D11069"
+      ]
+    },
+    {
+      "id": "R2",
+      "status": "proposed",
+      "text": "Close reports of bugs already fixed in newer releases; ask the reporter to update to the latest version and search closed issues.",
+      "cites": [
+        "D11069",
+        "D11141",
+        "D11426"
+      ]
+    },
+    {
+      "id": "R3",
+      "status": "proposed",
+      "text": "Decline issues caused by package managers, registries, third-party packaging, or unsupported install methods that Biome does not control.",
+      "cites": [
+        "D8891",
+        "D10639",
+        "D10677",
+        "D11313",
+        "D5861"
+      ]
+    },
+    {
+      "id": "R4",
+      "status": "proposed",
+      "text": "Close reports where behavior works as designed or is documented, and point the user to the right config, option, or docs.",
+      "cites": [
+        "D10628",
+        "D10783",
+        "D11023",
+        "D10927",
+        "D11361",
+        "D8277"
+      ]
+    },
+    {
+      "id": "R5",
+      "status": "proposed",
+      "text": "Decline requests to detect or prioritize conflicts between lint rules; users must set up rule combinations in their own configuration.",
+      "cites": [
+        "D10628",
+        "D10783",
+        "D11361"
+      ]
+    },
+    {
+      "id": "R6",
+      "status": "proposed",
+      "text": "Decline work on lint rules planned for deprecation; tell users not to rely on them and to use other tools.",
+      "cites": [
+        "D11179",
+        "D11180",
+        "D11323"
+      ]
+    },
+    {
+      "id": "R7",
+      "status": "proposed",
+      "text": "Decline feature requests or extra docs that lack clear requirements or clear need; invite the requester to give details or send a PR.",
+      "cites": [
+        "D3992",
+        "D4836",
+        "D10656",
+        "D5861"
+      ]
+    }
+  ],
+  "summary": {
+    "without_history": {
+      "do": {
+        "mean": 6,
+        "min": 6,
+        "max": 6,
+        "of": [
+          10,
+          10,
+          10
+        ]
+      },
+      "skip": {
+        "mean": 1,
+        "min": 1,
+        "max": 1,
+        "of": [
+          5,
+          8,
+          5
+        ]
+      }
+    },
+    "with_history": {
+      "do": {
+        "mean": 7,
+        "min": 7,
+        "max": 7,
+        "of": [
+          10,
+          10,
+          10
+        ]
+      },
+      "skip": {
+        "mean": 1,
+        "min": 1,
+        "max": 1,
+        "of": [
+          5,
+          5,
+          5
+        ]
+      }
+    }
+  },
+  "baselines": {
+    "most_thumbs_up": {
+      "hits": 3,
+      "of": 10,
+      "base_rate": 0.35,
+      "random_expected": 3.5,
+      "lift": 0.86,
+      "p_random_at_least": 0.7411
+    },
+    "newest": {
+      "hits": 9,
+      "of": 10,
+      "base_rate": 0.35,
+      "random_expected": 3.5,
+      "lift": 2.57,
+      "p_random_at_least": 0.0005
+    },
+    "most_comments": {
+      "hits": 5,
+      "of": 10,
+      "base_rate": 0.35,
+      "random_expected": 3.5,
+      "lift": 1.43,
+      "p_random_at_least": 0.2455
+    },
+    "has_linked_pr": {
+      "hits": 5,
+      "of": 10,
+      "base_rate": 0.35,
+      "random_expected": 3.5,
+      "lift": 1.43,
+      "p_random_at_least": 0.2455
+    }
+  },
+  "runs": {
+    "without_history": [
+      {
+        "do": {
+          "hits": 6,
+          "of": 10,
+          "base_rate": 0.35,
+          "random_expected": 3.5,
+          "lift": 1.72,
+          "p_random_at_least": 0.0918
+        },
+        "skip": {
+          "hits": 1,
+          "of": 5,
+          "base_rate": 0.073,
+          "random_expected": 0.36,
+          "lift": 2.76,
+          "p_random_at_least": 0.3152
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 11453,
+              "reason": "A safe fix breaks imports. It's small, 9 days old, 4 reporters, and already has a linked PR.",
+              "rule_ids": []
+            },
+            {
+              "number": 11424,
+              "reason": "The Markdown formatter wipes out task lists (data loss). It's 10 days old and a maintainer is already engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 11351,
+              "reason": "A 'safe' fix breaks code. Effort is small, it's a fresh report, and 3 people have hit it.",
+              "rule_ids": []
+            },
+            {
+              "number": 7538,
+              "reason": "Logs grew past 150 GB and filled users' disks. It's a crash with 4 linked PRs and recent activity.",
+              "rule_ids": []
+            },
+            {
+              "number": 11174,
+              "reason": "False positive with active discussion (9 comments this month), a maintainer replied, and a PR is linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11504,
+              "reason": "A broken biome.json is silently ignored and defaults are used instead. Reported 5 days ago, maintainer engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix in stdin mode deletes script and style contents in HTML (data loss). A PR is already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11446,
+              "reason": "Fresh false positive in noUnnecessaryConditions. A maintainer replied and 3 people reported it.",
+              "rule_ids": []
+            },
+            {
+              "number": 11359,
+              "reason": "A recent regression (2.5.7+) causes a false positive in useAwaitThenable. Maintainer already engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 11366,
+              "reason": "CDATA fails to parse. 4 reporters and 9 comments this month, so it's an active report.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "This is the Renovate dependency dashboard, a bot tracking issue, not something to work on.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Already marked as a duplicate of an existing stack overflow report.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "A usage question. The maintainer explained that import sorting needs 'biome check', not the formatter.",
+              "rule_ids": []
+            },
+            {
+              "number": 8139,
+              "reason": "A maintainer said this is expected behavior. Only one reporter.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "Not a bug: the user runs an old CLI with a newer config. The maintainer already explained this.",
+              "rule_ids": []
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 6,
+          "of": 10,
+          "base_rate": 0.35,
+          "random_expected": 3.5,
+          "lift": 1.72,
+          "p_random_at_least": 0.0918
+        },
+        "skip": {
+          "hits": 1,
+          "of": 8,
+          "base_rate": 0.073,
+          "random_expected": 0.58,
+          "lift": 1.72,
+          "p_random_at_least": 0.4557
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 11453,
+              "reason": "A 'safe' fix breaks imports, the effort is small, a linked PR already exists, and the report is only 9 days old with 4 reporters.",
+              "rule_ids": []
+            },
+            {
+              "number": 7538,
+              "reason": "Logs filled the disk until apps shut down. 6 reporters, 4 linked PRs, a maintainer is engaged and there was activity this month.",
+              "rule_ids": []
+            },
+            {
+              "number": 11351,
+              "reason": "A 'safe' fix breaks user code. The fix looks small, the report is fresh and 3 people reported it.",
+              "rule_ids": []
+            },
+            {
+              "number": 11424,
+              "reason": "The Markdown formatter destroys task lists (data loss). The report is fresh and a maintainer already replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 11174,
+              "reason": "False positive with 9 comments this month, 4 reporters, a maintainer engaged and a linked PR.",
+              "rule_ids": []
+            },
+            {
+              "number": 11504,
+              "reason": "A broken biome.json is silently ignored and defaults are used instead. Reported 5 days ago and the maintainer is active in it.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix deletes the contents of script and style tags (data loss). A maintainer replied and a PR is linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11446,
+              "reason": "Fresh type-inference false positive with 3 reporters and a maintainer already engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 11366,
+              "reason": "CDATA fails to parse. 9 comments this month and 4 reporters, so it's an active and current report.",
+              "rule_ids": []
+            },
+            {
+              "number": 5293,
+              "reason": "46 thumbs and 9 reporters. The rule gives wrong results for React Compiler users. Medium effort and 3 linked PRs.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "This is a Renovate dependency dashboard, a bot tracking issue, not a bug or feature request.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Marked as a duplicate of an existing stack overflow report. Close it and point to the original.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "Question that's already answered: import sorting is part of 'biome check', not the formatter.",
+              "rule_ids": []
+            },
+            {
+              "number": 8139,
+              "reason": "A maintainer already said this is expected behaviour, and nobody has commented since.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "Caused by running an old CLI with a newer config, not a Biome bug. A maintainer already replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 2463,
+              "reason": "Plugin support is an XL umbrella issue with no maintainer reply and no activity. Too big for a few hours a week.",
+              "rule_ids": []
+            },
+            {
+              "number": 4726,
+              "reason": "HTML support is an XL umbrella with no activity in the last 30 days. It's a long-term roadmap item, not something for the next few weeks.",
+              "rule_ids": []
+            },
+            {
+              "number": 2365,
+              "reason": "YAML support is an XL umbrella, idle for the last 30 days. Popular, but too big for the next few weeks.",
+              "rule_ids": []
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 6,
+          "of": 10,
+          "base_rate": 0.35,
+          "random_expected": 3.5,
+          "lift": 1.72,
+          "p_random_at_least": 0.0918
+        },
+        "skip": {
+          "hits": 1,
+          "of": 5,
+          "base_rate": 0.073,
+          "random_expected": 0.36,
+          "lift": 2.76,
+          "p_random_at_least": 0.3152
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 11453,
+              "reason": "A \"safe\" fix breaks imports. The effort is small, a linked PR already exists, and 4 reporters are active from the last 9 days.",
+              "rule_ids": []
+            },
+            {
+              "number": 11424,
+              "reason": "The markdown formatter destroys task lists, so users lose data. It was reported 10 days ago and a maintainer has already replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 7538,
+              "reason": "Logs grew past 150 GB, filled the disk and shut down apps. There are 4 linked PRs and comments in the last 30 days.",
+              "rule_ids": []
+            },
+            {
+              "number": 11351,
+              "reason": "A \"safe\" fix breaks code. It is a small fix, reported 15 days ago by 3 people.",
+              "rule_ids": []
+            },
+            {
+              "number": 11174,
+              "reason": "False positive in a type-aware rule. A linked PR exists, a maintainer is involved, and there were 9 comments this month.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix in stdin mode deletes the contents of script and style tags, so users lose data. A linked PR already exists.",
+              "rule_ids": []
+            },
+            {
+              "number": 11504,
+              "reason": "A broken biome.json is silently ignored and defaults are applied. Reported 5 days ago, a maintainer is engaged, and the fix looks moderate.",
+              "rule_ids": []
+            },
+            {
+              "number": 5293,
+              "reason": "46 thumbs-up and 9 reporters. React Compiler users get wrong diagnostics. There are 3 linked PRs and recent activity.",
+              "rule_ids": []
+            },
+            {
+              "number": 11446,
+              "reason": "Fresh false positive in noUnnecessaryConditions. 3 reporters, and a maintainer replied within the last 9 days.",
+              "rule_ids": []
+            },
+            {
+              "number": 11359,
+              "reason": "A regression since 2.5.7 gives false positives in useAwaitThenable. It is fresh and a maintainer has already replied.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "This is a bot-maintained Renovate dependency dashboard, not an actionable issue.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Marked as a duplicate of an existing stack overflow report, and inactive for 66 days.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "Caused by running an old CLI against a newer config. User error, already explained by a maintainer.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "A question that is already answered: import sorting happens in biome check, not in the formatter.",
+              "rule_ids": []
+            },
+            {
+              "number": 8139,
+              "reason": "A maintainer says this behaviour is expected. It has 1 reporter and has been inactive for 286 days.",
+              "rule_ids": []
+            }
+          ]
+        }
+      }
+    ],
+    "with_history": [
+      {
+        "do": {
+          "hits": 7,
+          "of": 10,
+          "base_rate": 0.35,
+          "random_expected": 3.5,
+          "lift": 2,
+          "p_random_at_least": 0.0244
+        },
+        "skip": {
+          "hits": 1,
+          "of": 5,
+          "base_rate": 0.073,
+          "random_expected": 0.36,
+          "lift": 2.76,
+          "p_random_at_least": 0.3152
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 11453,
+              "reason": "Safe fix breaks imports; confirmed, small effort, linked PR, 9 days old, in the linter area the team is fixing now.",
+              "rule_ids": []
+            },
+            {
+              "number": 11419,
+              "reason": "Safe fix corrupts regex character classes; small effort, linked PR, fresh report.",
+              "rule_ids": []
+            },
+            {
+              "number": 10838,
+              "reason": "2.5.0 regression duplicates and drops JSX attributes (code loss); 6 reporters, linked PR, maintainer engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 11351,
+              "reason": "A 'safe' fix breaks code; confirmed, small effort, 15 days old.",
+              "rule_ids": []
+            },
+            {
+              "number": 11424,
+              "reason": "Markdown formatter destroys task lists (data loss); confirmed by a maintainer 10 days ago.",
+              "rule_ids": []
+            },
+            {
+              "number": 11275,
+              "reason": "LSP formatting deletes Astro frontmatter/HTML (data loss); confirmed, linked PR, 23 days old.",
+              "rule_ids": []
+            },
+            {
+              "number": 11174,
+              "reason": "Confirmed false positive with active discussion (9 comments this month), maintainer engaged, linked PR.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix via stdin deletes script/style contents (data loss); confirmed with a linked PR.",
+              "rule_ids": []
+            },
+            {
+              "number": 11446,
+              "reason": "Confirmed noUnnecessaryConditions false result; fresh, maintainer already replied, area in current focus.",
+              "rule_ids": []
+            },
+            {
+              "number": 7538,
+              "reason": "Logs filled 150+ GB of disk and took down apps; 6 reporters, 4 linked PRs, still active.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "Automated Dependency Dashboard, not an actionable issue.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "Works as designed: import sorting is done by 'biome check', not the formatter. Point to the docs.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 8139,
+              "reason": "A maintainer already said this behavior is expected; point to the formatter/linter config docs.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 10616,
+              "reason": "Error says the user runs an old CLI with a modern config; ask them to update to the latest version.",
+              "rule_ids": [
+                "R2"
+              ]
+            },
+            {
+              "number": 10760,
+              "reason": "Marked duplicate of an existing stack-overflow report and has a workaround; close in favor of the main issue.",
+              "rule_ids": []
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 7,
+          "of": 10,
+          "base_rate": 0.35,
+          "random_expected": 3.5,
+          "lift": 2,
+          "p_random_at_least": 0.0244
+        },
+        "skip": {
+          "hits": 1,
+          "of": 5,
+          "base_rate": 0.073,
+          "random_expected": 0.36,
+          "lift": 2.76,
+          "p_random_at_least": 0.3152
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 11453,
+              "reason": "Safe fix breaks imports. Small effort, a PR is already linked, the report is 9 days old and it's in your current focus area.",
+              "rule_ids": []
+            },
+            {
+              "number": 11419,
+              "reason": "Safe fix corrupts regex character classes. Small fix, a PR is already linked, the report is fresh and confirmed.",
+              "rule_ids": []
+            },
+            {
+              "number": 11351,
+              "reason": "A 'safe' fix in useSimplifiedLogicExpression breaks code. Confirmed, small effort, reported 15 days ago.",
+              "rule_ids": []
+            },
+            {
+              "number": 10838,
+              "reason": "Regression in 2.5.0: a fix duplicates or drops JSX attributes. 6 reporters, a PR is linked and a maintainer is engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 11275,
+              "reason": "LSP formatting deletes Astro frontmatter and HTML. Confirmed, a PR is linked, the report is fresh.",
+              "rule_ids": []
+            },
+            {
+              "number": 11424,
+              "reason": "The Markdown formatter destroys task lists. Confirmed, 10 days old, a maintainer has already replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "check --fix in stdin mode deletes script/style content. Confirmed, a PR is linked, a maintainer replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 11174,
+              "reason": "Confirmed false positive with 9 comments this month. A PR is linked and a maintainer is engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 7538,
+              "reason": "Biome wrote 150 GB of logs and filled users' disks. 6 reporters, 4 linked PRs, still active.",
+              "rule_ids": []
+            },
+            {
+              "number": 11446,
+              "reason": "Confirmed false positive where an explicit type argument is ignored. Fresh, and a maintainer has replied.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "This is an automated Dependency Dashboard issue, not a user problem. There is nothing to act on.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "Works as designed: import sorting is not part of the formatter. Point the user to 'biome check'.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 8139,
+              "reason": "A maintainer already said this behavior is expected. Close and point the user to the config docs.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 10616,
+              "reason": "The user is running an old CLI with a newer config. Ask them to update to the latest release.",
+              "rule_ids": [
+                "R2"
+              ]
+            },
+            {
+              "number": 10760,
+              "reason": "Marked as a duplicate stack-overflow report, and a workaround exists. Track it in the main crash issue.",
+              "rule_ids": []
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 7,
+          "of": 10,
+          "base_rate": 0.35,
+          "random_expected": 3.5,
+          "lift": 2,
+          "p_random_at_least": 0.0244
+        },
+        "skip": {
+          "hits": 1,
+          "of": 5,
+          "base_rate": 0.073,
+          "random_expected": 0.36,
+          "lift": 2.76,
+          "p_random_at_least": 0.3152
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 11453,
+              "reason": "A 'safe' fix breaks imports. Bug is confirmed, effort is small, a PR is already linked, and the report is 9 days old.",
+              "rule_ids": []
+            },
+            {
+              "number": 11419,
+              "reason": "A 'safe' fix corrupts regex character classes. Bug is confirmed, the fix looks small and a PR is already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11351,
+              "reason": "A 'safe' fix produces broken code. Bug is confirmed, effort is small, reported 15 days ago, and the lint area is the team's current focus.",
+              "rule_ids": []
+            },
+            {
+              "number": 10838,
+              "reason": "Regression in 2.5.0: sorting attributes duplicates one and silently drops another. 6 reporters, a maintainer is engaged and a PR is linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11275,
+              "reason": "LSP formatting deletes Astro frontmatter and HTML (data loss). Bug is confirmed, a PR is linked and the report is 23 days old.",
+              "rule_ids": []
+            },
+            {
+              "number": 11174,
+              "reason": "Confirmed false positive with 9 comments this month. A maintainer is engaged and a PR is already linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11424,
+              "reason": "The Markdown formatter destroys task lists (data loss). Confirmed 10 days ago and a maintainer has replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 8252,
+              "reason": "In stdin mode, check --fix deletes the contents of script and style tags (data loss). Bug is confirmed, a maintainer replied and a PR is linked.",
+              "rule_ids": []
+            },
+            {
+              "number": 11446,
+              "reason": "Confirmed type-inference bug that ignores an explicit type argument. Fresh, with a maintainer already replying.",
+              "rule_ids": []
+            },
+            {
+              "number": 7538,
+              "reason": "Logs grew past 150 GB and filled users' disks. 6 reporters, 4 linked PRs and still getting comments.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "An automated Renovate dependency dashboard, not an actionable issue.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "Working as designed: the formatter does not sort imports. A maintainer already pointed the user to 'biome check'.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 8139,
+              "reason": "A maintainer said the behavior is expected. Point the user to the docs on how the formatter and linter interact.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 10616,
+              "reason": "Caused by running an old CLI with a newer config. Ask the user to update to the latest release.",
+              "rule_ids": [
+                "R2",
+                "R4"
+              ]
+            },
+            {
+              "number": 10760,
+              "reason": "Marked as a duplicate stack-overflow report with a known workaround. Track it in the main stack-overflow issue (#7728).",
+              "rule_ids": []
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "model_calls": 17,
+  "note": "Issue bodies are today's text; GitHub's REST API keeps no edit history. Comments edited after the freeze were dropped."
+}

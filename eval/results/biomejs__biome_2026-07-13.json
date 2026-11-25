@@ -1,0 +1,889 @@
+{
+  "repo": "biomejs/biome",
+  "freeze": "2026-07-13",
+  "window_days": 56,
+  "model": "claude-sonnet-5-5",
+  "versions": {
+    "assess": "fc563cd89452a66e",
+    "rank": "35ba590879ecd53c",
+    "rules": "5acafa9e768d05dd"
+  },
+  "open_at_freeze": 388,
+  "outcome_counts": {
+    "still_open": 317,
+    "completed": 59,
+    "not_planned": 12
+  },
+  "quote_checks_failed": 9,
+  "rejections_used": 23,
+  "recent_fixes_used": 0,
+  "rules": [
+    {
+      "id": "R1",
+      "status": "proposed",
+      "text": "Decline issues about third-party packaging, registries or user environments the project doesn't control (e.g. Winget, Windows packages, npm registry settings, dependency versions); point users to t...",
+      "cites": [
+        "D8891",
+        "D10505",
+        "D10639",
+        "D10677"
+      ]
+    },
+    {
+      "id": "R2",
+      "status": "proposed",
+      "text": "Close reports of known, documented limitations or unsupported/experimental features as not bugs; link the docs or the existing tracking item.",
+      "cites": [
+        "D10166",
+        "D10359",
+        "D10360",
+        "D10280",
+        "D10502",
+        "D9992"
+      ]
+    },
+    {
+      "id": "R3",
+      "status": "proposed",
+      "text": "Decline bug reports that lack a valid reproduction or skip the issue template; ask the reporter to refile with the template filled in.",
+      "cites": [
+        "D8694",
+        "D10229",
+        "D10304"
+      ]
+    },
+    {
+      "id": "R4",
+      "status": "proposed",
+      "text": "Close reports where behavior is intended, such as matching Prettier, following the spec, or rule conflicts users should resolve in their own config.",
+      "cites": [
+        "D10256",
+        "D10382",
+        "D10628",
+        "D10783"
+      ]
+    },
+    {
+      "id": "R5",
+      "status": "proposed",
+      "text": "Redirect requests that belong elsewhere (an existing tracking issue, a discussion, or the security advisory form) instead of keeping a new issue open.",
+      "cites": [
+        "D10019",
+        "D10280",
+        "D10360",
+        "D10380",
+        "D10508"
+      ]
+    },
+    {
+      "id": "R6",
+      "status": "proposed",
+      "text": "Decline work the maintainer sees as low value or already covered, such as docs that are already enough or non-failing CI noise, but welcome outside PRs or proposals.",
+      "cites": [
+        "D10323",
+        "D10656",
+        "D10783"
+      ]
+    },
+    {
+      "id": "R7",
+      "status": "proposed",
+      "text": "Defer confirmed problems that need a major refactor or missing infrastructure to a future major version rather than fixing them now.",
+      "cites": [
+        "D7361",
+        "D9992",
+        "D10359"
+      ]
+    }
+  ],
+  "summary": {
+    "without_history": {
+      "do": {
+        "mean": 3.33,
+        "min": 3,
+        "max": 4,
+        "of": [
+          10,
+          10,
+          10
+        ]
+      },
+      "skip": {
+        "mean": 0,
+        "min": 0,
+        "max": 0,
+        "of": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    "with_history": {
+      "do": {
+        "mean": 4,
+        "min": 4,
+        "max": 4,
+        "of": [
+          10,
+          10,
+          10
+        ]
+      },
+      "skip": {
+        "mean": 0,
+        "min": 0,
+        "max": 0,
+        "of": [
+          8,
+          7,
+          7
+        ]
+      }
+    }
+  },
+  "baselines": {
+    "most_thumbs_up": {
+      "hits": 0,
+      "of": 10,
+      "base_rate": 0.152,
+      "random_expected": 1.52,
+      "lift": 0,
+      "p_random_at_least": 1
+    },
+    "newest": {
+      "hits": 7,
+      "of": 10,
+      "base_rate": 0.152,
+      "random_expected": 1.52,
+      "lift": 4.6,
+      "p_random_at_least": 0.0001
+    },
+    "most_comments": {
+      "hits": 0,
+      "of": 10,
+      "base_rate": 0.152,
+      "random_expected": 1.52,
+      "lift": 0,
+      "p_random_at_least": 1
+    },
+    "has_linked_pr": {
+      "hits": 1,
+      "of": 10,
+      "base_rate": 0.152,
+      "random_expected": 1.52,
+      "lift": 0.66,
+      "p_random_at_least": 0.8119
+    }
+  },
+  "runs": {
+    "without_history": [
+      {
+        "do": {
+          "hits": 3,
+          "of": 10,
+          "base_rate": 0.152,
+          "random_expected": 1.52,
+          "lift": 1.97,
+          "p_random_at_least": 0.183
+        },
+        "skip": {
+          "hits": 0,
+          "of": 7,
+          "base_rate": 0.031,
+          "random_expected": 0.22,
+          "lift": 0,
+          "p_random_at_least": 1
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 8252,
+              "reason": "check --fix deletes script/style contents in HTML (data loss). A maintainer is engaged and a PR is already linked, so it is close to done.",
+              "rule_ids": []
+            },
+            {
+              "number": 10830,
+              "reason": "Fresh report of CSS/JS vanishing from style/script tags (data loss). Likely the same root cause as #8252, so fix them together.",
+              "rule_ids": []
+            },
+            {
+              "number": 10622,
+              "reason": "Vue parser panics on :=\"props\" shorthand. Small effort and a recent report with a clear repro.",
+              "rule_ids": []
+            },
+            {
+              "number": 10800,
+              "reason": "SCSS false positive with a linked PR and an engaged maintainer. Small effort, nearly done.",
+              "rule_ids": []
+            },
+            {
+              "number": 10806,
+              "reason": "Crash hit by 4 reporters with 9 comments this month. The maintainer is already engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 10633,
+              "reason": "noUnnecessaryConditions flags every switch case as unreachable. It's fresh, a maintainer replied, and it pairs with #10735 and #10704.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "Another fresh noUnnecessaryConditions false positive, with 4 reporters and a maintainer reply. Fix it in the same pass as #10633.",
+              "rule_ids": []
+            },
+            {
+              "number": 10782,
+              "reason": "noUndeclaredClasses hangs on long TSX import chains. Fresh, active, and the maintainer has replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Stack overflow (SIGSEGV) with type-aware nursery rules in 2.4.16. Recent, active thread with a maintainer reply.",
+              "rule_ids": []
+            },
+            {
+              "number": 8240,
+              "reason": "11 reporters see the extension using 99% CPU, and it is still active. Effort is larger, but many users are affected.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 9572,
+              "reason": "The reporter says it duplicates #9507.",
+              "rule_ids": []
+            },
+            {
+              "number": 9132,
+              "reason": "Duplicate: already tracked at #9218, per the thread.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "Not a bug: a modern config run with an old CLI. The maintainer already explained this.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "Question answered: import sorting is done by biome check, not the formatter.",
+              "rule_ids": []
+            },
+            {
+              "number": 8139,
+              "reason": "Maintainer explained the behavior is expected because of comment attachment. Nothing to fix.",
+              "rule_ids": []
+            },
+            {
+              "number": 2188,
+              "reason": "Renovate dependency dashboard, not an actionable issue.",
+              "rule_ids": []
+            },
+            {
+              "number": 10810,
+              "reason": "Marketplace domain verification is admin work, not a code issue, and the impact on users is unclear.",
+              "rule_ids": []
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 3,
+          "of": 10,
+          "base_rate": 0.152,
+          "random_expected": 1.52,
+          "lift": 1.97,
+          "p_random_at_least": 0.183
+        },
+        "skip": {
+          "hits": 0,
+          "of": 7,
+          "base_rate": 0.031,
+          "random_expected": 0.22,
+          "lift": 0,
+          "p_random_at_least": 1
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 8252,
+              "reason": "check --fix in stdin mode deletes script/style contents in HTML. That's lost content, and there's already a linked PR and a maintainer reply.",
+              "rule_ids": []
+            },
+            {
+              "number": 10830,
+              "reason": "Fresh report that CSS/JS inside style and script tags disappears on format. Lost content, probably the same cause as #8252.",
+              "rule_ids": []
+            },
+            {
+              "number": 10622,
+              "reason": "Vue parser panics on the :=\"props\" shorthand. Small fix, reported 29 days ago, 3 reporters.",
+              "rule_ids": []
+            },
+            {
+              "number": 10806,
+              "reason": "Fresh crash with 4 reporters, 9 comments this month and a maintainer engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 10782,
+              "reason": "noUndeclaredClasses hangs on long TSX import chains. Fresh, 3 reporters, maintainer already replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 10633,
+              "reason": "noUnnecessaryConditions flags every switch case as unreachable across whole codebases. Fresh, maintainer engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "Another noUnnecessaryConditions false positive with 4 reporters and active discussion. Can likely be fixed together with #10633 and #10735.",
+              "rule_ids": []
+            },
+            {
+              "number": 10800,
+              "reason": "SCSS functions wrongly flagged by noUnknownFunction. Small fix with a linked PR already open.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Stack overflow (SIGSEGV) with type-aware nursery rules in 2.4.16. Recent, maintainer replied, 6 comments this month.",
+              "rule_ids": []
+            },
+            {
+              "number": 6974,
+              "reason": "Destructuring a private member is still reported as unused. Small fix with 2 linked PRs already.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "This is the Renovate bot's dependency dashboard, not an issue to work on.",
+              "rule_ids": []
+            },
+            {
+              "number": 9572,
+              "reason": "The reporter says it's a duplicate of #9507.",
+              "rule_ids": []
+            },
+            {
+              "number": 9132,
+              "reason": "Already tracked in #9218, as a commenter confirmed.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "Not a bug. The user is running an old CLI with a newer config, and a maintainer already explained this.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "A question that's already answered: import sorting is done by biome check, not the formatter.",
+              "rule_ids": []
+            },
+            {
+              "number": 8139,
+              "reason": "A maintainer explained this is expected behavior (how comments are attached). A question, not a bug.",
+              "rule_ids": []
+            },
+            {
+              "number": 10810,
+              "reason": "Marketplace domain verification is a publisher admin task, not code work. No maintainer reply and no user harm.",
+              "rule_ids": []
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 4,
+          "of": 10,
+          "base_rate": 0.152,
+          "random_expected": 1.52,
+          "lift": 2.63,
+          "p_random_at_least": 0.0499
+        },
+        "skip": {
+          "hits": 0,
+          "of": 7,
+          "base_rate": 0.031,
+          "random_expected": 0.22,
+          "lift": 0,
+          "p_random_at_least": 1
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 8252,
+              "reason": "check --fix in stdin mode deletes script/style contents in HTML. That is data loss, a PR is already linked and a maintainer is engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 10830,
+              "reason": "Fresh report (10 days) of CSS/JS in style/script tags disappearing. Likely the same root cause as #8252, so fix them together.",
+              "rule_ids": []
+            },
+            {
+              "number": 10622,
+              "reason": "Vue parser panics on the :=\"props\" shorthand. It's a fresh crash with a clear repro and the fix looks small.",
+              "rule_ids": []
+            },
+            {
+              "number": 10806,
+              "reason": "Unexpected-error crash hitting 4 reporters, with 9 comments in the last 30 days and a maintainer already engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 10782,
+              "reason": "noUndeclaredClasses hangs on long TSX import chains. A fresh hang that a maintainer is already looking at.",
+              "rule_ids": []
+            },
+            {
+              "number": 10633,
+              "reason": "noUnnecessaryConditions now flags every switch case as unreachable in some codebases. Active thread and a maintainer has replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 10735,
+              "reason": "Same noUnnecessaryConditions switch false positive, with generic unions. Fix it together with #10633.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "Another noUnnecessaryConditions false positive reported 23 days ago. Batch it with the other two reports on this rule.",
+              "rule_ids": []
+            },
+            {
+              "number": 10800,
+              "reason": "SCSS functions wrongly flagged by noUnknownFunction. The fix looks small, a PR is already linked and the thread is active.",
+              "rule_ids": []
+            },
+            {
+              "number": 10760,
+              "reason": "Stack overflow with type-aware nursery rules in 2.4.16 (reported on darwin-arm64). A recent crash with an active thread and a maintainer reply.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 2188,
+              "reason": "Renovate dependency dashboard, not a real issue. Nothing to act on.",
+              "rule_ids": []
+            },
+            {
+              "number": 9572,
+              "reason": "The reporter says it duplicates #9507.",
+              "rule_ids": []
+            },
+            {
+              "number": 9132,
+              "reason": "Maintainer said it's already tracked in #9218. Close as a duplicate.",
+              "rule_ids": []
+            },
+            {
+              "number": 10616,
+              "reason": "User error: a new-style config run with an old CLI, already explained by a maintainer.",
+              "rule_ids": []
+            },
+            {
+              "number": 7416,
+              "reason": "Answered question: import sorting is done by biome check, not the formatter.",
+              "rule_ids": []
+            },
+            {
+              "number": 8139,
+              "reason": "Maintainer explained the behavior is expected given where the comments attach. Not a bug.",
+              "rule_ids": []
+            },
+            {
+              "number": 10810,
+              "reason": "VS Marketplace domain verification is an account/admin task, not a code change, and its benefit to users is unclear.",
+              "rule_ids": []
+            }
+          ]
+        }
+      }
+    ],
+    "with_history": [
+      {
+        "do": {
+          "hits": 4,
+          "of": 10,
+          "base_rate": 0.152,
+          "random_expected": 1.52,
+          "lift": 2.63,
+          "p_random_at_least": 0.0499
+        },
+        "skip": {
+          "hits": 0,
+          "of": 8,
+          "base_rate": 0.031,
+          "random_expected": 0.25,
+          "lift": 0,
+          "p_random_at_least": 1
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 8252,
+              "reason": "Confirmed data loss: check --fix via stdin wipes / contents. A linked PR exists and a maintainer is engaged.",
+              "rule_ids": []
+            },
+            {
+              "number": 10830,
+              "reason": "Fresh report of CSS/JS inside / disappearing. Likely the same bug as #8252, so fix and verify them together.",
+              "rule_ids": []
+            },
+            {
+              "number": 10622,
+              "reason": "Confirmed parser panic on a common Vue v-bind shorthand. Small effort and a fresh report.",
+              "rule_ids": []
+            },
+            {
+              "number": 10806,
+              "reason": "Confirmed formatter crash with 9 comments in the last 30 days. The maintainer is engaged and the reporters are still around.",
+              "rule_ids": []
+            },
+            {
+              "number": 10800,
+              "reason": "Confirmed SCSS false positive, small effort, and a linked PR already exists. Close to done.",
+              "rule_ids": []
+            },
+            {
+              "number": 10782,
+              "reason": "Confirmed hang in noUndeclaredClasses on a long TSX import chain. Fresh, and the maintainer has replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "Confirmed noUnnecessaryConditions false positives, 4 reporters, active this month. Fixing it may also resolve #10735 and #10633.",
+              "rule_ids": []
+            },
+            {
+              "number": 10633,
+              "reason": "noUnnecessaryConditions flags every switch case as unreachable across a codebase. Wide wrong results, so handle it alongside #10704.",
+              "rule_ids": []
+            },
+            {
+              "number": 10735,
+              "reason": "Confirmed noUnnecessaryConditions false positive with switch on a generic union. Fresh; same area as #10704.",
+              "rule_ids": []
+            },
+            {
+              "number": 7728,
+              "reason": "Confirmed stack overflow crash on large invalid JSON, hit by 5 reporters. No maintainer reply yet.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 9572,
+              "reason": "The reporter says it duplicates #9507. Close and point to that issue.",
+              "rule_ids": [
+                "R5"
+              ]
+            },
+            {
+              "number": 9132,
+              "reason": "Already tracked at #9218 according to the thread. Close as a duplicate.",
+              "rule_ids": [
+                "R5"
+              ]
+            },
+            {
+              "number": 10616,
+              "reason": "The user's config is newer than the CLI they run. That is an environment problem, not a Biome bug.",
+              "rule_ids": [
+                "R1"
+              ]
+            },
+            {
+              "number": 7416,
+              "reason": "Intended: import sorting isn't part of the formatter, so users should run biome check. Link the docs.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 8139,
+              "reason": "The maintainer explained the behavior is expected because of where the comments attach. No bug.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 2188,
+              "reason": "Bot-generated Dependency Dashboard, not an actionable issue for maintainer time.",
+              "rule_ids": []
+            },
+            {
+              "number": 10810,
+              "reason": "Marketplace domain verification is an admin chore with no user harm. Low value as an open issue.",
+              "rule_ids": [
+                "R6"
+              ]
+            },
+            {
+              "number": 1584,
+              "reason": "Cosmetic duplicate entry in the editor's formatter list, stale for 900+ days with no recent activity.",
+              "rule_ids": [
+                "R6"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 4,
+          "of": 10,
+          "base_rate": 0.152,
+          "random_expected": 1.52,
+          "lift": 2.63,
+          "p_random_at_least": 0.0499
+        },
+        "skip": {
+          "hits": 0,
+          "of": 7,
+          "base_rate": 0.031,
+          "random_expected": 0.22,
+          "lift": 0,
+          "p_random_at_least": 1
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 8252,
+              "reason": "Confirmed data loss: check --fix over stdin deletes the contents of script/style tags in HTML. A linked PR already exists.",
+              "rule_ids": []
+            },
+            {
+              "number": 10830,
+              "reason": "Fresh data-loss report: style and script contents disappear when formatting. Looks related to #8252, so check it alongside that fix.",
+              "rule_ids": []
+            },
+            {
+              "number": 10622,
+              "reason": "Confirmed parser panic on Vue's :=\"props\" shorthand. Small fix, reported 29 days ago.",
+              "rule_ids": []
+            },
+            {
+              "number": 10806,
+              "reason": "Confirmed formatter crash, 12 days old, with 9 comments in the last 30 days and a maintainer already involved.",
+              "rule_ids": []
+            },
+            {
+              "number": 10800,
+              "reason": "Confirmed false positive on SCSS functions. Small fix, a PR is already linked and the issue is still active.",
+              "rule_ids": []
+            },
+            {
+              "number": 10782,
+              "reason": "Confirmed hang in noUndeclaredClasses on long TSX import chains. Fresh, and a maintainer has replied.",
+              "rule_ids": []
+            },
+            {
+              "number": 10633,
+              "reason": "After an update, noUnnecessaryConditions flags every switch case as unreachable. Likely shares a root cause with #10735 and #10704, so fix them together.",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "Confirmed noUnnecessaryConditions false positives from 4 reporters. Recent, maintainer engaged. Batch with #10633 and #10735.",
+              "rule_ids": []
+            },
+            {
+              "number": 10735,
+              "reason": "Confirmed noUnnecessaryConditions false positive with switch and generic unions. Same area as #10633 and #10704.",
+              "rule_ids": []
+            },
+            {
+              "number": 6974,
+              "reason": "Confirmed unused-private-member false positive when the member is used through destructuring. Small fix with 2 linked PRs already.",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 9572,
+              "reason": "The reporter says it duplicates #9507. Close and point to that issue.",
+              "rule_ids": [
+                "R5"
+              ]
+            },
+            {
+              "number": 9132,
+              "reason": "A maintainer says this is already tracked at #9218. Close as a duplicate.",
+              "rule_ids": [
+                "R5"
+              ]
+            },
+            {
+              "number": 2188,
+              "reason": "Automated Renovate dependency dashboard, not a user issue. Nothing to act on.",
+              "rule_ids": [
+                "R6"
+              ]
+            },
+            {
+              "number": 10616,
+              "reason": "The user's environment runs an old CLI with a newer config. They need to upgrade; this isn't a Biome bug.",
+              "rule_ids": [
+                "R1"
+              ]
+            },
+            {
+              "number": 7416,
+              "reason": "Works as designed: import sorting isn't part of the formatter, and 'biome check' does it. A maintainer already explained this.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 8139,
+              "reason": "A maintainer explained the behavior is expected because of where the comments attach. No response from the reporter since.",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 10810,
+              "reason": "Low-value publisher-account task with no user impact. Not a code issue for the tracker.",
+              "rule_ids": [
+                "R6"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "do": {
+          "hits": 4,
+          "of": 10,
+          "base_rate": 0.152,
+          "random_expected": 1.52,
+          "lift": 2.63,
+          "p_random_at_least": 0.0499
+        },
+        "skip": {
+          "hits": 0,
+          "of": 7,
+          "base_rate": 0.031,
+          "random_expected": 0.22,
+          "lift": 0,
+          "p_random_at_least": 1
+        },
+        "plan": {
+          "do": [
+            {
+              "number": 8252,
+              "reason": "Confirmed data loss: check --fix in stdin mode deletes script/style contents; a PR is already linked",
+              "rule_ids": []
+            },
+            {
+              "number": 10830,
+              "reason": "Fresh data-loss report: style and script contents vanish on format; likely the same fix as 8252",
+              "rule_ids": []
+            },
+            {
+              "number": 10800,
+              "reason": "Confirmed SCSS false positive, small effort, a PR is linked and the reporter is active",
+              "rule_ids": []
+            },
+            {
+              "number": 10622,
+              "reason": "Confirmed Vue parser panic on :=\"props\"; the fix looks small and the report is recent",
+              "rule_ids": []
+            },
+            {
+              "number": 10806,
+              "reason": "Confirmed formatter crash, 4 reporters, 9 comments in the last 30 days",
+              "rule_ids": []
+            },
+            {
+              "number": 10782,
+              "reason": "Confirmed linter hang on TSX import chains, 14 days old, maintainer already engaged",
+              "rule_ids": []
+            },
+            {
+              "number": 10704,
+              "reason": "Confirmed noUnnecessaryConditions false positive with 4 reporters; can be fixed together with 10735 and 10633",
+              "rule_ids": []
+            },
+            {
+              "number": 10735,
+              "reason": "Confirmed noUnnecessaryConditions false positive on switch; same area as 10704, so cheap to fix together",
+              "rule_ids": []
+            },
+            {
+              "number": 7711,
+              "reason": "Memory leak with a reliable reproduction forced a hard reset; a PR is already linked",
+              "rule_ids": []
+            },
+            {
+              "number": 6974,
+              "reason": "Confirmed small false positive with 2 linked PRs, close to done",
+              "rule_ids": []
+            }
+          ],
+          "skip": [
+            {
+              "number": 9132,
+              "reason": "Duplicate: already tracked at #9218",
+              "rule_ids": [
+                "R5"
+              ]
+            },
+            {
+              "number": 9572,
+              "reason": "The reporter says it duplicates #9507",
+              "rule_ids": [
+                "R5"
+              ]
+            },
+            {
+              "number": 10616,
+              "reason": "User is running an old CLI with a newer config, an environment problem and not a bug",
+              "rule_ids": [
+                "R1"
+              ]
+            },
+            {
+              "number": 7416,
+              "reason": "Import sorting isn't part of the formatter; documented, use biome check",
+              "rule_ids": [
+                "R2",
+                "R4"
+              ]
+            },
+            {
+              "number": 8139,
+              "reason": "Maintainer explained the behavior is expected (comment attachment)",
+              "rule_ids": [
+                "R4"
+              ]
+            },
+            {
+              "number": 2188,
+              "reason": "Dependency bot dashboard, not an issue users need fixed",
+              "rule_ids": [
+                "R6"
+              ]
+            },
+            {
+              "number": 10810,
+              "reason": "Marketplace domain verification is low-value polish with no user harm",
+              "rule_ids": [
+                "R6"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "model_calls": 6,
+  "note": "Issue bodies are today's text; GitHub's REST API keeps no edit history. Comments edited after the freeze were dropped."
+}

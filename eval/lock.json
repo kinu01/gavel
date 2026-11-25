@@ -1,0 +1,37 @@
+{
+  "locked_at": "2026-11-25T17:40:24.364Z",
+  "reason": "Prompts, weights and scoring frozen after the development run on 2026-07-13. Freezes 2026-08-03 and 2026-08-31 are run once with these files.",
+  "model": "claude-sonnet-5-5",
+  "repo": "biomejs/biome",
+  "dev_freeze": "2026-07-13",
+  "held_out_freezes": [
+    "2026-08-03",
+    "2026-08-31"
+  ],
+  "window_days": 56,
+  "runs_per_condition": 3,
+  "versions": {
+    "assess": "fc563cd89452a66e",
+    "rank": "35ba590879ecd53c",
+    "rules": "5acafa9e768d05dd"
+  },
+  "files": {
+    "src/assess.mjs": "6910aea9dc415a88",
+    "src/rank.mjs": "f217342ac206522d",
+    "src/rules.mjs": "b91455df10cfc381",
+    "src/features.mjs": "2a63234a70a63114",
+    "src/focus.mjs": "758af909c290dc36",
+    "src/snapshot.mjs": "46ed743b6980ef30",
+    "src/fence.mjs": "e5d47c90c54f328e",
+    "src/sanitize.mjs": "5d679829d2b35c7c",
+    "prompts/assess.md": "127f046113345c34",
+    "prompts/rank.md": "76344d9a7b6cc4d6",
+    "prompts/rules.md": "71d0722df4f514d7",
+    "schemas/assessment.json": "d8d8b12d480546e9",
+    "schemas/plan.json": "6f48c175350c7af4",
+    "schemas/rules.json": "6bf3191235df001e",
+    "eval/backtest.mjs": "32507e131235cbb0",
+    "eval/score.mjs": "a4edbc9f48d6fc7e",
+    "eval/baselines.mjs": "ce63a7f3f89da4c0"
+  }
+}

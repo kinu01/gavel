@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["do", "skip"],
+  "properties": {
+    "do": { "$ref": "#/$defs/list" },
+    "skip": { "$ref": "#/$defs/list" }
+  },
+  "$defs": {
+    "list": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["number", "reason", "rule_ids"],
+        "properties": {
+          "number": { "type": "integer" },
+          "reason": { "type": "string", "maxLength": 260 },
+          "rule_ids": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

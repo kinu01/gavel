@@ -1,0 +1,12 @@
+{
+  "name": "gavel",
+  "version": "0.1.0",
+  "description": "An agent that proposes what a project should work on next, and a human who rules on every step.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Emmanuel Shola",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test"
+  }
+}
